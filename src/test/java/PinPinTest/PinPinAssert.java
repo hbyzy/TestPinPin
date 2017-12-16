@@ -1,8 +1,11 @@
 package PinPinTest;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PinPinAssert {
     WebDriver driver;
@@ -39,5 +42,24 @@ public class PinPinAssert {
 
         System.out.println("can not chage to right page:" + rname);
         return false;
+    }
+
+    public void strCompare(String str1,String str2){
+        String sub1,sub2;
+        sub1=str1.substring(0,str1.indexOf(' '));
+        sub2=str2.substring(0,str1.indexOf(' '));
+        Assert.assertEquals(sub1,sub2);
+    }
+
+    public void  regAssert(String str1,String str2) {
+        String re1 = "\\bshop\\d+";
+        Pattern p = Pattern.compile(re1, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+        Matcher m = p.matcher(str1);
+        Matcher n = p.matcher(str2);
+        System.out.println(m.group());
+        System.out.println(n.group());
+
+        Assert.assertEquals(m.group(),(n.group()));
+
     }
 }

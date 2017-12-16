@@ -13,7 +13,7 @@ public class Switchwindow {
     public void Switch(String handle){
         Set<String> wHandles= driver.getWindowHandles();
         for(String s: wHandles){
-            System.out.println(s);
+           // System.out.println(s);
             if (!s.equals(handle)){
                 driver.switchTo().window(s);
                 return;

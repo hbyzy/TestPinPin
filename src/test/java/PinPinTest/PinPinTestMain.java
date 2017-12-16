@@ -11,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PinPinTestMain {
@@ -22,8 +23,10 @@ public class PinPinTestMain {
     List<WebElement> resultName;
     // FindElementWait findElement;
     List<WebElement> resultUrl;
-    List<String>  picUrl
+    List<String>  picUrl= new ArrayList<String>();
     String resultWindow;  //,restaurantWindow;
+    int[] deliveryTime;
+
 
     @BeforeTest
     public void setup() {
@@ -74,32 +77,40 @@ public class PinPinTestMain {
         System.out.println(resultWindow);
         for (WebElement we:resultUrl) {
             Assert.assertEquals(we.getAttribute("src"),we.getAttribute("ng-src"));
-
+            picUrl.add(we.getAttribute("src"));
         }
+        deliveryTime=new int[resultUrl.size()];
     }
 
     @Test(dependsOnMethods = {"getResult"})
     public void resultUrlTest() throws InterruptedException {
         WebElement img,dTime;
+        String imgurl,imgTemp,dlivTime;
 
-        //for (int i=0;i<resultUrl.size();i++){
-           int i=0;
+        int index;
+        for (int i=0;i<resultUrl.size();i++) {
             System.out.println("---------------------------------------");
-            System.out.print("try to click:"+resultName.get(i).getText());
+            System.out.print("try to click:" + resultName.get(i).getText());
+
             resultUrl.get(i).click();
             switchwindow.Switch(resultWindow);
-            By imageBy=By.id("shopImage");
-            img=findElement.FindElementWait(imageBy,2);
-            System.out.println("img:  "+img.getAttribute("style"));
-            System.out.println((resultUrl.get(i).getAttribute("src")));
+            By imageBy = By.id("shopImage");
+            img = findElement.FindElementWait(imageBy, 2);
 
-        // Assert.assertEquals(img,resultUrl.get(i).getAttribute("src") );
-            System.out.println("Now  -->"+"it changes to a right page");
-            By topinfo=By.cssSelector("#topinfo > b:nth-child(8)");
-            dTime=findElement.FindElementWait(topinfo,1);
-            System.out.println("delivery time around:"+dTime.getText());
-            System.out.println("restaurant window :"+driver.getWindowHandle());
+            imgTemp = img.getAttribute("style");
+            //imgurl = ppp.gotSubStr(imgTemp);
 
+            //testAssert.strCompare(imgurl,picUrl.get(i));
+            testAssert.regAssert(imgTemp,picUrl.get(i)) ;
+
+            System.out.println("Now  -->" + "it changes to a right page");
+            By topinfo = By.cssSelector("#topinfo > b:nth-child(8)");
+            dTime = findElement.FindElementWait(topinfo, 1);
+            System.out.println("delivery time around:" + dTime.getText());
+            index= dTime.getText().indexOf(" ");
+            deliveryTime[i]=Integer.parseInt(dTime.getText().substring(0,index));
+            driver.close();
+        }
     }
 
     @AfterTest

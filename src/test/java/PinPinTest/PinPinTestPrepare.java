@@ -41,6 +41,9 @@ public class PinPinTestPrepare {
         JavascriptExecutor jse= (JavascriptExecutor)driver;
         jse.executeScript("windows.scrollby(0.250)","");
     }
-
+    public String gotSubStr(String str){
+        String arr[]=str.split("\"");
+        return arr[1];
+    }
 
 }

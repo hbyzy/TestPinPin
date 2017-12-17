@@ -26,7 +26,7 @@ public class PinPinTestMain {
     List<String>  picUrl= new ArrayList<String>();
     String resultWindow;  //,restaurantWindow;
     int[] deliveryTime;
-
+    WebDriverWait  wait;
 
     @BeforeTest
     public void setup() {
@@ -35,6 +35,7 @@ public class PinPinTestMain {
         testAssert=new PinPinAssert(driver);
         findElement=new FindElementWait(driver);
         switchwindow= new Switchwindow(driver);
+        wait = new WebDriverWait(driver, 20);
     }
 
     @Test
@@ -90,16 +91,16 @@ public class PinPinTestMain {
         int index;
         for (int i=0;i<resultUrl.size();i++) {
             System.out.println("---------------------------------------");
-            System.out.print("try to click:" + resultName.get(i).getText());
+            System.out.println("try to click:" + resultName.get(i).getText());
 
+            wait.until(ExpectedConditions.elementToBeClickable(resultUrl.get(i)));
             resultUrl.get(i).click();
-            switchwindow.Switch(resultWindow);
+            switchwindow.Switch(resultWindow);// switch to restaurant window
             By imageBy = By.id("shopImage");
             img = findElement.FindElementWait(imageBy, 2);
 
             imgTemp = img.getAttribute("style");
             //imgurl = ppp.gotSubStr(imgTemp);
-
             //testAssert.strCompare(imgurl,picUrl.get(i));
             testAssert.regAssert(imgTemp,picUrl.get(i)) ;
 
@@ -110,6 +111,7 @@ public class PinPinTestMain {
             index= dTime.getText().indexOf(" ");
             deliveryTime[i]=Integer.parseInt(dTime.getText().substring(0,index));
             driver.close();
+            driver.switchTo().window(resultWindow);
         }
     }
 

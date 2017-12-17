@@ -13,8 +13,9 @@ public class FindElementWait {
     public FindElementWait(WebDriver wdriver){
         driver=wdriver;
     }
+
     public WebElement FindElementWait(By byStr,int i) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait = new WebDriverWait(driver, 20);
 
         switch (i) {
             case 1:
@@ -25,8 +26,10 @@ public class FindElementWait {
                 wait.until(ExpectedConditions.visibilityOf(driver.findElement(byStr)));
                 element = driver.findElement(byStr);
                 break;
+
         }
         return element;
     }
+
 }
 

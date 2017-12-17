@@ -44,22 +44,32 @@ public class PinPinAssert {
         return false;
     }
 
-    public void strCompare(String str1,String str2){
-        String sub1,sub2;
-        sub1=str1.substring(0,str1.indexOf(' '));
-        sub2=str2.substring(0,str1.indexOf(' '));
-        Assert.assertEquals(sub1,sub2);
+    public void strCompare(String str1, String str2) {
+        String sub1, sub2;
+        sub1 = str1.substring(0, str1.indexOf(' '));
+        sub2 = str2.substring(0, str1.indexOf(' '));
+        Assert.assertEquals(sub1, sub2);
     }
 
-    public void  regAssert(String str1,String str2) {
-        String re1 = "\\bshop\\d+";
-        Pattern p = Pattern.compile(re1, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-        Matcher m = p.matcher(str1);
-        Matcher n = p.matcher(str2);
-        System.out.println(m.group());
-        System.out.println(n.group());
 
-        Assert.assertEquals(m.group(),(n.group()));
+    public void regAssert(String str1, String str2) {
+
+        String regex = "(\\bshop\\d+)";
+        System.out.println(str1);
+        System.out.println(str2);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str1);
+        Matcher matcher1 = pattern.matcher(str2);
+
+        while (matcher.find()&matcher1.find()) {
+            for (int i = 1; i <= matcher.groupCount(); i++) {
+                System.out.println("Group " + i + ": " + matcher.group(i));
+                System.out.println("Group " + i + ": " + matcher1.group(i));
+            }
+        }
+        //Assert.assertEquals(matcher.group(0), matcher1.group(0));
 
     }
 }
+
+

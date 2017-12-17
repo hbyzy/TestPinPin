@@ -55,20 +55,35 @@ public class PinPinAssert {
     public void regAssert(String str1, String str2) {
 
         String regex = "(\\bshop\\d+)";
-        System.out.println(str1);
-        System.out.println(str2);
+       //ystem.out.println(str1);
+       //ystem.out.println(str2);
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str1);
         Matcher matcher1 = pattern.matcher(str2);
-
-        while (matcher.find()&matcher1.find()) {
+        matcher.matches();
+        matcher1.matches();
+        while (matcher.find() & matcher1.find()) {
             for (int i = 1; i <= matcher.groupCount(); i++) {
                 System.out.println("Group " + i + ": " + matcher.group(i));
                 System.out.println("Group " + i + ": " + matcher1.group(i));
             }
         }
-        //Assert.assertEquals(matcher.group(0), matcher1.group(0));
+        //Assert.assertEquals(matcher.group(1), matcher1.group(1));
 
+    }
+
+    public int regAssertStr(String reg, String str) {
+        String regex = reg, returnStr = null;
+        System.out.println(reg + ":" + str);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            returnStr = matcher.group();
+
+//                System.out.println("Group " + 1 + ": " + matcher.group(1));
+     //     System.out.println("reg result:" + returnStr);
+        }
+        return Integer.parseInt(returnStr);
     }
 }
 

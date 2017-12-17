@@ -4,6 +4,7 @@ import org.junit.Ignore;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -85,16 +86,17 @@ public class PinPinTestMain {
 
     @Test(dependsOnMethods = {"getResult"})
     public void resultUrlTest() throws InterruptedException {
+        Actions act=new Actions(driver);
         WebElement img,dTime;
         String imgurl,imgTemp,dlivTime;
-
+        int minTime=0,maxTime=0;
         int index;
         for (int i=0;i<resultUrl.size();i++) {
             System.out.println("---------------------------------------");
             System.out.println("try to click:" + resultName.get(i).getText());
 
             wait.until(ExpectedConditions.elementToBeClickable(resultUrl.get(i)));
-            resultUrl.get(i).click();
+            act.moveToElement(resultUrl.get(i)).click().perform();
             switchwindow.Switch(resultWindow);// switch to restaurant window
             By imageBy = By.id("shopImage");
             img = findElement.FindElementWait(imageBy, 2);
@@ -108,11 +110,19 @@ public class PinPinTestMain {
             By topinfo = By.cssSelector("#topinfo > b:nth-child(8)");
             dTime = findElement.FindElementWait(topinfo, 1);
             System.out.println("delivery time around:" + dTime.getText());
-            index= dTime.getText().indexOf(" ");
-            deliveryTime[i]=Integer.parseInt(dTime.getText().substring(0,index));
+            //index= dTime.getText().indexOf(" ");
+            //deliveryTime[i]=Integer.parseInt(dTime.getText().substring(0,index));
+            deliveryTime[i]=testAssert.regAssertStr("(\\d+)",dTime.getText());
             driver.close();
             driver.switchTo().window(resultWindow);
         }
+        for(int i=0;i<deliveryTime.length;i++){
+            if (deliveryTime[i]>maxTime)
+                maxTime=deliveryTime[i];
+            else if(deliveryTime[i]<minTime)
+                    minTime=deliveryTime[i];
+        }
+        System.out.println("delivery time in range:"+minTime+"--"+maxTime+"   minutes");
     }
 
     @AfterTest

@@ -1,6 +1,10 @@
 package PinPinTest;
 
-import org.junit.Ignore;
+import PinPinTest.Prepare.PinPinTestPrepare;
+import PinPinTest.Prepare.Switchwindow;
+import PinPinTest.Tools.FindElementWait;
+import PinPinTest.Tools.PinPinAssert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,14 +12,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-public class PinPinTestMain {
+public class PinPinSearchTest {
     WebDriver driver;
     PinPinTestPrepare ppp= new PinPinTestPrepare();
     PinPinAssert testAssert;
@@ -29,6 +33,17 @@ public class PinPinTestMain {
     int[] deliveryTime;
     WebDriverWait  wait;
 
+    @DataProvider(name="searchString")
+    public Iterator<Object[]> searchParameter(){
+       String[] returnStr={"guy concordia","h2w 1x9","h2w","3895 St Laurent Blvd, Montreal, QC H2W 1X9",
+               "","asdf"};
+       List<String> returnList= Arrays.asList(returnStr);
+       List<Object[]> returnObj=new ArrayList<Object[]>();
+       for(String s:returnList)
+           returnObj.add(new Object[]{s});
+
+        return returnObj.iterator();
+    }
     @BeforeTest
     public void setup() {
         driver = ppp.driver;
@@ -39,8 +54,9 @@ public class PinPinTestMain {
         wait = new WebDriverWait(driver, 20);
     }
 
-    @Test
-    public void PinPinHomePageTest() throws InterruptedException {
+    @Test(priority = 0,dataProvider = "searchString")
+    //@Parameters({"input"})
+    public void PinPinHomePageTest(String input) throws InterruptedException {
         Boolean pageLoad=testAssert.PageChangeAssert("Pinpin Eat");
         if (!pageLoad)
             System.out.println("can not load homePage");
@@ -52,7 +68,7 @@ public class PinPinTestMain {
             WebElement serchBtn=driver.findElement(mapSearchBtn);
             WebElement login=driver.findElement(loginBtn);
 
-            serchText.sendKeys("guy concordia");
+            serchText.sendKeys(input);
             serchBtn.click();
 
             //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#delivertotext > span")));
@@ -60,8 +76,9 @@ public class PinPinTestMain {
             WebElement centerText = findElement.FindElementWait(CT, 1);
 
             String getText=centerText.getText();
-            Assert.assertEquals("Deliver to guy concordia.",getText);
-            if ("Deliver to guy concordia.".equals(getText))
+            String text="Deliver to "+input+".";
+            Assert.assertEquals(text,getText);
+            if (getText.equals(getText))
                 System.out.println("in right searchresult page");
             else
                 System.out.println("sth wrong, we are not in right page,center text is:"+getText);
@@ -70,7 +87,7 @@ public class PinPinTestMain {
     }
 
 
-    @Test(dependsOnMethods ={"PinPinHomePageTest"} )
+    @Test(enabled=false,priority=1)//(dependsOnMethods ={"PinPinHomePageTest"} )
     public void getResult(){
         WebElement result= driver.findElement(By.id("shopscontainer"));
         resultName =result.findElements(By.className("sname"));
@@ -84,7 +101,7 @@ public class PinPinTestMain {
         deliveryTime=new int[resultUrl.size()];
     }
 
-    @Test(dependsOnMethods = {"getResult"})
+    @Test(enabled = false,priority=2)//(dependsOnMethods = {"getResult"})
     public void resultUrlTest() throws InterruptedException {
         Actions act=new Actions(driver);
         WebElement img,dTime;
@@ -98,10 +115,13 @@ public class PinPinTestMain {
             wait.until(ExpectedConditions.elementToBeClickable(resultUrl.get(i)));
             act.moveToElement(resultUrl.get(i)).click().perform();
             switchwindow.Switch(resultWindow);// switch to restaurant window
-            By imageBy = By.id("shopImage");
-            img = findElement.FindElementWait(imageBy, 2);
 
+            By imageBy = By.id("shopImage");
+            do{
+            img = findElement.FindElementWait(imageBy, 2);
             imgTemp = img.getAttribute("style");
+            System.out.println("in loop"+imgTemp);}
+            while(imgTemp.isEmpty());
             //imgurl = ppp.gotSubStr(imgTemp);
             //testAssert.strCompare(imgurl,picUrl.get(i));
             testAssert.regAssert(imgTemp,picUrl.get(i)) ;
@@ -134,3 +154,4 @@ public class PinPinTestMain {
         }
     }
 }
+//https://rationaleemotions.wordpress.com/2013/07/31/pretty-printing-with-testng/

@@ -1,8 +1,8 @@
-package PinPinTest;
+package PinPinTest.PageElements;
 
 import org.openqa.selenium.By;
 
-public class PinPinPageElement {
+public class HomePage {
     public void homepage(){
         By mapSerchInput=By.id("mapserchInput");
         By mapSerchBtn=By.id("mapserchbtn");

@@ -1,8 +1,10 @@
-package PinPinTest;
+package PinPinTest.Tools;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,31 +46,38 @@ public class PinPinAssert {
         return false;
     }
 
-    public void strCompare(String str1, String str2) {
-        String sub1, sub2;
-        sub1 = str1.substring(0, str1.indexOf(' '));
-        sub2 = str2.substring(0, str1.indexOf(' '));
-        Assert.assertEquals(sub1, sub2);
-    }
+
 
 
     public void regAssert(String str1, String str2) {
+        List<String> res1 = new ArrayList<>();
+        List<String> res2 = new ArrayList<>();
 
         String regex = "(\\bshop\\d+)";
-       //ystem.out.println(str1);
-       //ystem.out.println(str2);
+        System.out.println("str1:  "+str1);
+        System.out.println("str2:  "+str2);
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str1);
         Matcher matcher1 = pattern.matcher(str2);
         matcher.matches();
         matcher1.matches();
-        while (matcher.find() & matcher1.find()) {
+
+        while (matcher.find()) {
             for (int i = 1; i <= matcher.groupCount(); i++) {
-                System.out.println("Group " + i + ": " + matcher.group(i));
-                System.out.println("Group " + i + ": " + matcher1.group(i));
+                res1.add(matcher.group(i));
+                System.out.println("str1  Group " + i + ": " + res1.get(i-1));
             }
         }
-        //Assert.assertEquals(matcher.group(1), matcher1.group(1));
+
+        while (matcher1.find()) {
+            for (int i = 1; i <= matcher.groupCount(); i++) {
+                res2.add(matcher1.group(i));
+                System.out.println("str2 Group " + i + ": " + res2.get(i-1));
+            }
+        }
+            System.out.println("str1:"+res1.get(0));
+            System.out.println("str2:"+res2.get(0));
+        //Assert.assertEquals(res1.get(0), res2.get(0));
 
     }
 

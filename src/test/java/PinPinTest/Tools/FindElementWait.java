@@ -1,4 +1,4 @@
-package PinPinTest;
+package PinPinTest.Tools;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

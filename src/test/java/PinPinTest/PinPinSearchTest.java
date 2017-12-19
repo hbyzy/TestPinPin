@@ -32,6 +32,7 @@ public class PinPinSearchTest {
     String resultWindow;  //,restaurantWindow;
     int[] deliveryTime;
     WebDriverWait  wait;
+    String serchInput=null;
 
     @DataProvider(name="searchString")
     public Iterator<Object[]> searchParameter(){
@@ -44,6 +45,10 @@ public class PinPinSearchTest {
 
         return returnObj.iterator();
     }
+    @Factory(dataProvider="searchString")
+    public void setparameter(String s){
+        this.serchInput=s;
+    }
     @BeforeTest
     public void setup() {
         driver = ppp.driver;
@@ -54,9 +59,10 @@ public class PinPinSearchTest {
         wait = new WebDriverWait(driver, 20);
     }
 
-    @Test(priority = 0,dataProvider = "searchString")
+    @Test(priority = 0)//dataProvider = "searchString")
     //@Parameters({"input"})
-    public void PinPinHomePageTest(String input) throws InterruptedException {
+    public void PinPinHomePageTest() throws InterruptedException {
+        String input=serchInput;
         Boolean pageLoad=testAssert.PageChangeAssert("Pinpin Eat");
         if (!pageLoad)
             System.out.println("can not load homePage");

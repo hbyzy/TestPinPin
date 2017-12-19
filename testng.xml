@@ -2,13 +2,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/QASTUDY/program/java/TestPinPin">
-    <!--<parameter name="input" value="guy concordia"/>-->
-            <classes>
-            <class name="PinPinTest.PinPinSearchTest">
-                <methods>
-                    <include name="PinPinHomePageTest"/>
-                </methods>
-            </class>
+    <parameter name="input" value="guy concordia"/>
+    <parameter name="input" value="h2w 1x9"/>
+    <parameter name="input" value="h2w"/>
+    <parameter name="input" value=""/>
+    <!--<parameter name="input" value="3895 St Laurent Blvd, Montreal, QC H2W 1X9"/>-->
+          <classes>
+            <class name="PinPinTest.PinPinSearchTest"/>
+                <!--<methods>-->
+                    <!--<include name="PinPinHomePageTest"/>-->
+                <!--</methods>-->
+            <!--</class>-->
         </classes>
     </test>
 </suite>

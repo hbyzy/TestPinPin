@@ -30,7 +30,7 @@ public class PinPinTestPrepare {
     public void pageLoad(String url){
         baseUrl=url;
         driver.get(baseUrl);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     public  void tearDown() throws Exception{

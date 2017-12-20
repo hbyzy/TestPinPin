@@ -45,12 +45,13 @@ public class serchInput {
         List<Object[]> returnObj=new ArrayList<Object[]>();
         for(String s:returnList)
             returnObj.add(new Object[]{s});
-
+        System.out.println("in dataprovider");
         return returnObj.iterator();
     }
 
-    @BeforeMethod
+    @BeforeTest
     public void setup() {
+        System.out.println("beforetest");
         driver = ppp.driver;
         ppp.pageLoad("https://www.pinpineat.com/" );
         testAssert=new PinPinAssert(driver);
@@ -61,8 +62,8 @@ public class serchInput {
 
     @Test(dataProvider = "searchString")
     //@Parameters("input")
-    public void PinPinHomePageTest(String searchInput) throws InterruptedException {
-        String input=searchInput;
+    public void PinPinHomePageTest(String searchString) throws InterruptedException {
+        String input=searchString;
         int min=0;
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("   "+input);
@@ -78,12 +79,14 @@ public class serchInput {
             WebElement serchText=driver.findElement(mapSearchInput);
             WebElement serchBtn=driver.findElement(mapSearchBtn);
             WebElement login=driver.findElement(loginBtn);
-            if (serchBtn.getAttribute("disabled")==null){
+            serchText.sendKeys(input);
+
+            if (serchBtn.getAttribute("translate disabled")==null){
                 System.out.println("search disabled when search text is:"+input);
                 return;
             }
 
-            serchText.sendKeys(input);
+
             serchBtn.click();
 
             //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#delivertotext > span")));
@@ -107,23 +110,29 @@ public class serchInput {
         resultWindow=driver.getWindowHandle();
         System.out.println(resultWindow);
 //search result process
-        for (int i=0;i<resultUrl.size();i++){
-            System.out.println("src:"+resultUrl.get(i).getAttribute("src"));
-            System.out.println("ng-src:"+resultUrl.get(i).getAttribute("ng-src"));
-            Assert.assertEquals(resultUrl.get(i).getAttribute("src"),resultUrl.get(i).getAttribute("ng-src"));
-
-            picUrl.add(resultUrl.get(i).getAttribute("src"));
-
-           // wait.until(ExpectedConditions.elementToBeClickable(By.xpath("./div[2]/span[2]/b")));
-            min=Integer.parseInt(resultUrl.get(i).findElement(By.xpath("/a/div[2]/span[2]/b")).getText());
-            System.out.print(resultName.get(i).getText()+min);
-        }//*[@id="shopscontainer"]/div[3]/div[1]/div/div/a/div[2]/span[2]/b
+//        for (int i=0;i<resultUrl.size();i++){
+//            System.out.println("src:"+resultUrl.get(i).getAttribute("src"));
+//            System.out.println("ng-src:"+resultUrl.get(i).getAttribute("ng-src"));
+//            Assert.assertEquals(resultUrl.get(i).getAttribute("src"),resultUrl.get(i).getAttribute("ng-src"));
+//
+//            picUrl.add(resultUrl.get(i).getAttribute("src"));
+//
+//           // wait.until(ExpectedConditions.elementToBeClickable(By.xpath("./div[2]/span[2]/b")));
+//            min=Integer.parseInt(resultUrl.get(i).findElement(By.xpath("/a/div[2]/span[2]/b")).getText());
+//            System.out.print(resultName.get(i).getText()+min);
+//        }//*[@id="shopscontainer"]/div[3]/div[1]/div/div/a/div[2]/span[2]/b
     }////*[@id="shopscontainer"]/div[3]/div[1]/div/div/a
     ////*[@id="shopscontainer"]/div[3]/div[1]/div/div/a/div[1]/img
     //<b style="font-size: 13px;color:black" class="ng-binding">30</b>
 
     @AfterMethod
+    public void afterMethod(){
+        System.out.println("after method");
+        driver.navigate().back();
+    }
+    @AfterTest
     public void tearDown(){
+        System.out.println("after test");
         try {
             ppp.tearDown();
         } catch (Exception e) {

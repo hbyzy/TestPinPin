@@ -34,6 +34,7 @@ public class PinPinTestPrepare {
     }
 
     public  void tearDown() throws Exception{
+        driver.close();
         driver.quit();
     }
 

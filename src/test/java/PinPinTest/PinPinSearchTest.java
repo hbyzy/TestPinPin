@@ -32,10 +32,10 @@ public class PinPinSearchTest {
     String resultWindow;  //,restaurantWindow;
     int[] deliveryTime;
     WebDriverWait  wait;
- //   String serchInput="guy concordia";
+ //   String SearchInput="guy concordia";
 
 //    public PinPinSearchTest(String s){
-//        this.serchInput=s;
+//        this.SearchInput=s;
 //    }
 
     @BeforeTest

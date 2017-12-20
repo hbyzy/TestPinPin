@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/QASTUDY/program/java/TestPinPin">
+       <!--<parameter name="input" value="3895 St Laurent Blvd, Montreal, QC H2W 1X9"/>-->
+          <classes>
+            <class name="PinPinTest.SearchInput"/>
+                <!--<methods>-->
+                    <!--<include name="PinPinHomePageTest"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+        </classes>
+    </test>
+</suite>

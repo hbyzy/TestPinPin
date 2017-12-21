@@ -1,34 +1,37 @@
 package PinPinTest;
 
-import PinPinTest.PageElements.pageElements;
+import PinPinTest.PageElements.HomePage;
+import PinPinTest.PageElements.LoginPage;
 import PinPinTest.Prepare.PinPinTestPrepare;
 import PinPinTest.Prepare.Switchwindow;
 import PinPinTest.Tools.FindElementWait;
 import PinPinTest.Tools.PinPinAssert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.AssertJUnit;
+import org.testng.annotations.*;
+import org.testng.asserts.Assertion;
 
 public class homePageTest {
     WebDriver driver;
-    PinPinTestPrepare ppp=new PinPinTestPrepare();
+    PinPinTestPrepare ppp = new PinPinTestPrepare();
     PinPinAssert testAssert;
     FindElementWait findElement;
     Switchwindow switchwindow;
-    pageElements pageEl;
+    HomePage homePage;
+    LoginPage loginPage;
     WebDriverWait wait;
-    @BeforeTest
+
+    @BeforeMethod
     public void beforeTest() throws InterruptedException {
         driver = ppp.driver;
         ppp.pageLoad("https://www.pinpineat.com/");
         testAssert = new PinPinAssert(driver);
         findElement = new FindElementWait(driver);
         switchwindow = new Switchwindow(driver);
-        pageEl= PageFactory.initElements(driver,pageElements.class );
-                new pageElements(driver);
+        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
         wait = new WebDriverWait(driver, 20);
         Boolean pageLoad = testAssert.PageChangeAssert("Pinpin Eat");
         if (!pageLoad)
@@ -37,8 +40,30 @@ public class homePageTest {
             System.out.println("we are in homepage now");
         }
     }
-    @Test
-    public void clickLoginBtn(){
 
+    @Test
+    public void clickLoginBtn() {
+        homePage.loginBtn.click();
+        WebElement log = findElement.FindElementWait(loginPage.LoginTxt, 2);
+        Assert.assertEquals(log.getText(), "Login");
+        System.out.println(log.getText().equals("Login") ? "change to login window" : "something wrong when click login button");
     }
+
+    @Test
+    public void basketClick() {
+        homePage.basket.click();
+        findElement.FindElementWait(By.id("try"), 3);
+        Alert a1 = driver.switchTo().alert();
+        System.out.println(a1.getText());
+        a1.accept();
+        WebElement log = findElement.FindElementWait(loginPage.LoginTxt, 2);
+        Assert.assertEquals(log.getText(), "Login");
+        System.out.println(log.getText().equals("Login") ? "change to login window by alert " : "something wrong when click basket button");
+    }
+
+    //http://www.cnblogs.com/rosepotato/p/4118203.html
+    @AfterMethod
+    public void tearDown() {
+    driver.close();
+}
 }

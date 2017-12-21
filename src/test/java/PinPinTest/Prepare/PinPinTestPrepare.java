@@ -1,19 +1,24 @@
 package PinPinTest.Prepare;
 
 
+import PinPinTest.Tools.DriverListener;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import java.beans.EventHandler;
 import java.util.concurrent.TimeUnit;
 
 public class PinPinTestPrepare {
-    public static WebDriver driver;
-    public String baseUrl;
-    public int timeout=5000;
-    public int interval=500;
+    public static WebDriver edriver;
+   public EventFiringWebDriver driver;
+   String baseUrl;
+   int timeout=5000;
+   int interval=500;
 
     public PinPinTestPrepare(){
         String osName= (System.getProperty("os.name"));
@@ -24,7 +29,11 @@ public class PinPinTestPrepare {
 
         ChromeOptions chromeOptions =new ChromeOptions();
         chromeOptions.addArguments("--kiosk");
-        driver= new ChromeDriver(chromeOptions);
+
+        edriver= new ChromeDriver(chromeOptions);
+        driver=new EventFiringWebDriver(edriver);
+        DriverListener handler = new DriverListener();
+        driver.register( handler);
     }
 
     public void pageLoad(String url){

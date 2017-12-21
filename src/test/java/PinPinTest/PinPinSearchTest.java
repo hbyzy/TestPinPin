@@ -118,7 +118,7 @@ public class PinPinSearchTest {
 
             By imageBy = By.id("shopImage");
             do{
-            img = findElement.FindElementWait(imageBy, 4);
+            img = findElement.FindElementWait(imageBy, 5);
             imgTemp = img.getAttribute("style");
             System.out.println("in loop"+imgTemp);}
             while(imgTemp.isEmpty());

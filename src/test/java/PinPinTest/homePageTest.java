@@ -13,6 +13,8 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.*;
 import org.testng.asserts.Assertion;
 
+import java.util.Set;
+
 public class homePageTest {
     WebDriver driver;
     PinPinTestPrepare ppp = new PinPinTestPrepare();
@@ -23,16 +25,22 @@ public class homePageTest {
     LoginPage loginPage;
     WebDriverWait wait;
 
-    @BeforeMethod
-    public void beforeTest() throws InterruptedException {
+    @BeforeTest
+    public void beforeTest() {
         driver = ppp.driver;
-        ppp.pageLoad("https://www.pinpineat.com/");
+
         testAssert = new PinPinAssert(driver);
         findElement = new FindElementWait(driver);
         switchwindow = new Switchwindow(driver);
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
         wait = new WebDriverWait(driver, 20);
+
+    }
+
+    @BeforeMethod
+    public void BeforeMethod() throws InterruptedException {
+        ppp.pageLoad("https://www.pinpineat.com/");
         Boolean pageLoad = testAssert.PageChangeAssert("Pinpin Eat");
         if (!pageLoad)
             System.out.println("can not load homePage");
@@ -54,7 +62,7 @@ public class homePageTest {
         homePage.basket.click();
         findElement.FindElementWait(By.id("try"), 3);
         Alert a1 = driver.switchTo().alert();
-        System.out.println(a1.getText());
+        System.out.println("alert shows: "+a1.getText());
         a1.accept();
         WebElement log = findElement.FindElementWait(loginPage.LoginTxt, 2);
         Assert.assertEquals(log.getText(), "Login");
@@ -63,7 +71,15 @@ public class homePageTest {
 
     //http://www.cnblogs.com/rosepotato/p/4118203.html
     @AfterMethod
-    public void tearDown() {
-    driver.close();
-}
+    public void afterMethod() {
+            System.out.println("------------------------------------" );
+            System.out.println("one test finished, go to next test or test finish soon" );
+            System.out.println("---------------------------------------" );
+
+    }
+
+    @AfterClass
+    public void afterClass() {
+        driver.quit();
+    }
 }

@@ -49,9 +49,9 @@ public class PinPinSearchTest {
     }
 
     @Test(priority = 0)
-    @Parameters("input")
-       public void PinPinHomePageTest(String searchInput) throws InterruptedException {
-        String input=searchInput;
+   // @Parameters("input")
+       public void PinPinHomePageTest( )throws InterruptedException {
+        String input="guy concordia";
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("   "+input);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");

@@ -63,7 +63,6 @@ public class SearchInput {
     }
 
     @Test(dataProvider = "searchString")
-    //@Parameters("input")
     public void PinPinHomePageTest(String searchString) throws InterruptedException {
         String input = searchString;
         int min = 0;
@@ -83,7 +82,7 @@ public class SearchInput {
             WebElement serchBtn = driver.findElement(mapSearchBtn);
             WebElement login = driver.findElement(loginBtn);
             serchText.sendKeys(input);
-//if search btn disabled prop is true then could not clicke btn, so bypass test.
+//if search btn disabled prop is true then  search btn is disabled, so bypass test.
             if (!(serchBtn.getAttribute("disabled") == null)) {
                 System.out.println("search disabled when search text is:" + input);
                 disabledFlag = true;
@@ -103,7 +102,7 @@ public class SearchInput {
                 else
                     System.out.println("sth wrong, we are not in right page,center text is:" + getText);
 
-//get all restaurant's name url
+//get all restaurant's name, url, delivery time,and distance.
                 result = driver.findElement(By.id("shopscontainer"));
                 resultName = result.findElements(By.className("sname"));
                 resultUrl = result.findElements(By.className("shopImg"));

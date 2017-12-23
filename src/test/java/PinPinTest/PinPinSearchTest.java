@@ -15,8 +15,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class PinPinSearchTest {
@@ -28,14 +26,36 @@ public class PinPinSearchTest {
     List<WebElement> resultName;
     // FindElementWait findElement;
     List<WebElement> resultUrl;
-    List<String>  picUrl= new ArrayList<String>();
+    List<String>  picUrl= new ArrayList<>();
     String resultWindow;  //,restaurantWindow;
     int[] deliveryTime;
     WebDriverWait  wait;
- //   String SearchInput="guy concordia";
+    String searchInput="GUY CONCORDIA";
 
-//    public PinPinSearchTest(String s){
-//        this.SearchInput=s;
+//// section for @factory
+//        public PinPinSearchTest(String s) {
+//        this.searchInput=s;
+//    }
+
+//    @DataProvider(name = "searchString")
+//    //public Iterator<Object[]> searchParameter() {
+//      public static Object[][] SearchParameter(){
+  //      String[] returnStr = {"guy concordia", "h2w 1x9", "h2w", "3895 St Laurent Blvd, Montreal, QC H2W 1X9",
+    //            "", "asdf"};
+//        List<String> returnList = Arrays.asList(returnStr);
+//        List<Object[]> returnObj = new ArrayList<Object[]>();
+//
+//        for (String s : returnList)
+//            returnObj.add(new Object[]{s});
+//        System.out.println("data provider");
+//        return new Object[][]{{"guy concordia"}, {"h2w 1x9"}, {"h2w"}, {"3895St Laurent Blvd, Montreal"},{""},{"QC H2W 1X9"}};
+        //        return returnObj.iterator();
+//    }
+
+//    @Factory(dataProvider = "searchString")
+//    public  PinPinSearchTest( String param) {
+//        this.searchInput = param;
+//        System.out.println("searchInput is :"+this.searchInput);
 //    }
 
     @BeforeTest
@@ -46,19 +66,20 @@ public class PinPinSearchTest {
         findElement=new FindElementWait(driver);
         switchwindow= new Switchwindow(driver);
         wait = new WebDriverWait(driver, 20);
+        System.out.println("BeforeTest");
     }
 
     @Test(priority = 0)
-   // @Parameters("input")
-       public void PinPinHomePageTest( )throws InterruptedException {
-        String input="guy concordia";
+       public void PinPinHomePageTest( ) {
+        String input=searchInput;
+
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("   "+input);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Boolean pageLoad=testAssert.PageChangeAssert("Pinpin Eat");
-        if (!pageLoad)
-            System.out.println("can not load homePage");
-        else{
+//        Boolean pageLoad=testAssert.PageChangeAssert("Pinpin Eat");
+//        if (!pageLoad)
+//            System.out.println("can not load homePage");
+//        else{
             By mapSearchInput=By.id("mapsearchInput");
             By mapSearchBtn=By.id("mapsearchbtn");
             By loginBtn=By.linkText("Login");
@@ -78,17 +99,12 @@ public class PinPinSearchTest {
             String getText=centerText.getText();
             String text="Deliver to "+input+".";
             Assert.assertEquals(text,getText);
-            if (getText.equals(getText))
+            if (getText.equals(text))
                 System.out.println("in right searchresult page");
             else
                 System.out.println("sth wrong, we are not in right page,center text is:"+getText);
-
-        }
-    }
-
-
-    @Test(enabled=true,dependsOnMethods ={"PinPinHomePageTest"} )
-    public void getResult(){
+//       }
+ // collect all data for future test
         WebElement result= driver.findElement(By.id("shopscontainer"));
         resultName =result.findElements(By.className("sname"));
         resultUrl=result.findElements(By.className("shopImg"));
@@ -101,8 +117,8 @@ public class PinPinSearchTest {
         deliveryTime=new int[resultUrl.size()];
     }
 
-    @Test(enabled = true,dependsOnMethods = {"getResult"})
-    public void resultUrlTest() throws InterruptedException {
+    @Test(enabled = true,dependsOnMethods ={"PinPinHomePageTest"})
+    public void resultUrlTest()  {
         Actions act=new Actions(driver);
         WebElement img,dTime;
         String imgurl,imgTemp,dlivTime;
@@ -152,6 +168,8 @@ public class PinPinSearchTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        PublicVar publicVar=new PublicVar();
+//        publicVar.setFlag(true);
     }
 }
 //https://rationaleemotions.wordpress.com/2013/07/31/pretty-printing-with-testng/

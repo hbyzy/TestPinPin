@@ -42,14 +42,17 @@ public class PinPinTestPrepare {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    public  void tearDown() throws Exception{
+    public  void tearDown() {
         driver.close();
         driver.quit();
     }
 
-    public void rollup(){
-        JavascriptExecutor jse= (JavascriptExecutor)driver;
-        jse.executeScript("windows.scrollby(0.250)","");
+    public void rolldown(int x,int y){
+        JavascriptExecutor jse= driver;
+        //jse.executeScript("windows.scrollby(0.250)","");
+       // String jsstr="'windows.scrollby('+x+','+y)";
+        String jsstr="scroll("+x+','+y+")";
+        jse.executeScript(jsstr);
     }
     public String gotSubStr(String str){
         String arr[]=str.split("\"");

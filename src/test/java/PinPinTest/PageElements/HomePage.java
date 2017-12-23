@@ -16,16 +16,37 @@ public class HomePage {
     public WebElement appleStore;
     @FindBy(xpath = "//*[@id='playstoreImg']")
     public WebElement playStore;
+    @FindBy(xpath = "//*[@id='body-content']/div/div/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/div[2]/div/a[1]/span")
+    public WebElement playStoreTitle;
     @FindBy(css = "#myNavBar > ul > li:nth-child(3) > a")
     public WebElement basket;
     @FindBy(xpath = "//*[@id='myNavBar']/ul/li[1]/a/span")
     public WebElement loginBtn;
-    @FindBy(xpath = "a[@class='dropdown-toggle")
+    //translate
+    @FindBy(xpath = "//*[@id='myNavBar']/ul/li[4]/a/span")
     public WebElement translate;
+    @FindBy(xpath = "//*[@id='myNavBar']/ul/li[4]/ul/li[1]/a")
+    public WebElement english;
+    @FindBy(xpath = "//*[@id='myNavBar']/ul/li[4]/ul/li[2]/a")
+    public WebElement french;
+    @FindBy(xpath = "//*[@id='myNavBar']/ul/li[4]/ul/li[3]/a")
+    public WebElement chinese;
+
+    @FindBy(xpath = "//*[@id='myNavBar']/ul/li[1]/a/span/span[2]")
+    public WebElement loginText;
+
+    //botttom click
+    @FindBy(xpath = "//*[@id='footer']/div/div[2]/a[5]/p")
+    public WebElement needDriver;
+    @FindBy(xpath = "//*[@id='drivermodal']/div/div/div/p")
+    public WebElement needDriverAlertText;
+    @FindBy(xpath = "//*[@id='drivermodal']/div/div/div/button")
+    public WebElement needDriverAlertBtn;
+
 
     public HomePage(WebDriver wdriver) {
         driver = wdriver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
 

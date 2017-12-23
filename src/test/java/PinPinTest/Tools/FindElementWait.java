@@ -33,9 +33,7 @@ public class FindElementWait {
                 break;
             case 3:
                 wait.until(ExpectedConditions.alertIsPresent());
-
                 break;
-
             case 4:
                 wait.until(ExpectedConditions.presenceOfElementLocated(byStr));
                 element = driver.findElement(byStr);
@@ -44,9 +42,25 @@ public class FindElementWait {
                 wait.until(ExpectedConditions.attributeToBeNotEmpty(driver.findElement(byStr), "style"));
                 element = driver.findElement(byStr);
                 break;
+
         }
         return element;
     }
 
+    public WebElement FindElementWait(WebElement we, int i) {
+        WebElement element=null;
+        wait = new WebDriverWait(driver, 30, 500);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        switch (i) {
+            case 1:
+                wait.until(ExpectedConditions.elementToBeClickable(we));
+                element= we;
+        }
+        return element;
+    }
 }
 

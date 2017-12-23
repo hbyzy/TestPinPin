@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
     WebDriver driver;
 
-   public By LoginTxt = By.xpath("//*[@id='loginDiv']/div[2]/div/h4");
+    public By LoginTxt = By.xpath("//*[@id='loginDiv']/div[2]/div/h4");
 
 
     @FindBy(xpath = "//*[@id='username']")
@@ -24,6 +24,9 @@ public class LoginPage {
     public WebElement forgotPassword;
     @FindBy(xpath = "//*[@id='loginDiv']/div[2]/div/form/div[3]/p[2]/a")
     public WebElement signUp;
+    @FindBy(xpath = "//*[@id='loginDiv']/div[2]/div/p")
+    public WebElement loginWrongMessage;
+
 
     public LoginPage(WebDriver wdriver) {
         driver = wdriver;

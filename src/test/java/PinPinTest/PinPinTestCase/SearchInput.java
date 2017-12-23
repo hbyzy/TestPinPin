@@ -1,4 +1,4 @@
-package PinPinTest;
+package PinPinTest.PinPinTestCase;
 
 import PinPinTest.Prepare.PinPinTestPrepare;
 import PinPinTest.Prepare.Switchwindow;

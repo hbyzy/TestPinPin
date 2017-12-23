@@ -30,7 +30,7 @@ public class PinPinSearchTest {
     String resultWindow;  //,restaurantWindow;
     int[] deliveryTime;
     WebDriverWait  wait;
-    String searchInput="GUY CONCORDIA";
+    String searchInput="中国城";
 
 //// section for @factory
 //        public PinPinSearchTest(String s) {

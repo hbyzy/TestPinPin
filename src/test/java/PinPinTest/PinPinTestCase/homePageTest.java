@@ -1,4 +1,4 @@
-package PinPinTest;
+package PinPinTest.PinPinTestCase;
 
 import PinPinTest.PageElements.HomePage;
 import PinPinTest.PageElements.LoginPage;
@@ -61,7 +61,7 @@ public class homePageTest {
         homePage.loginBtn.click();
         WebElement log = findElement.FindElementWait(loginPage.LoginTxt, 2);
         Assert.assertEquals(log.getText(), "Login");
-        System.out.println(log.getText().equals("Login") ? "change to login window" : "something wrong when click login button");
+        System.out.println(log.getText().equals("Login") ? "change to login page" : "something wrong when click login button");
     }
 
     @Test(enabled = false)

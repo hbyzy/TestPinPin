@@ -48,7 +48,7 @@ public class FindElementWait {
     }
 
     public WebElement FindElementWait(WebElement we, int i) {
-        WebElement element=null;
+        WebElement element = null;
         wait = new WebDriverWait(driver, 30, 500);
         try {
             Thread.sleep(2000);
@@ -58,7 +58,10 @@ public class FindElementWait {
         switch (i) {
             case 1:
                 wait.until(ExpectedConditions.elementToBeClickable(we));
-                element= we;
+                element = we;
+            case 2:
+                wait.until(ExpectedConditions.visibilityOf(we));
+                element = we;
         }
         return element;
     }

@@ -6,6 +6,7 @@ import PinPinTest.Prepare.PinPinTestPrepare;
 import PinPinTest.Prepare.Switchwindow;
 import PinPinTest.Tools.FindElementWait;
 import PinPinTest.Tools.PinPinAssert;
+
 import org.apache.xpath.operations.Bool;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
@@ -64,7 +65,7 @@ public class homePageTest {
         System.out.println(log.getText().equals("Login") ? "change to login page" : "something wrong when click login button");
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void basketClick() {
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -138,7 +139,7 @@ public class homePageTest {
         Assert.assertEquals(homePage.playStoreTitle.getText(),"Pinpin Market");
             System.out.println("playStore assert right");
     }
-    @Test
+    @Test(enabled=false)
     public void needDriverClick(){
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();

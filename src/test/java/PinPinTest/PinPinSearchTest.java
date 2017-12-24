@@ -19,7 +19,7 @@ import java.util.List;
 
 public class PinPinSearchTest {
     WebDriver driver;
-    PinPinTestPrepare ppp= new PinPinTestPrepare();
+    PinPinTestPrepare ppp;
     PinPinAssert testAssert;
     FindElementWait findElement;
     Switchwindow switchwindow;
@@ -59,7 +59,9 @@ public class PinPinSearchTest {
 //    }
 
     @BeforeTest
-    public void setup() {
+    @Parameters("browserName")
+    public void setup(String browserName) {
+        ppp= new PinPinTestPrepare(browserName);
         driver = ppp.driver;
         ppp.pageLoad("https://www.pinpineat.com/" );
         testAssert=new PinPinAssert(driver);

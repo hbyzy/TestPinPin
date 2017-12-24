@@ -20,7 +20,7 @@ import java.util.List;
 
 public class LoginPageTest {
     WebDriver driver;
-    PinPinTestPrepare ppp = new PinPinTestPrepare();
+    PinPinTestPrepare ppp;
     PinPinAssert testAssert;
     FindElementWait findElement;
     Switchwindow switchwindow;
@@ -42,7 +42,9 @@ public class LoginPageTest {
     }
 
     @BeforeTest
-    public void beforeTest() {
+    @Parameters("browserName")
+    public void beforeTest(String browserName) {
+        ppp = new PinPinTestPrepare(browserName);
         driver = ppp.driver;
 
         testAssert = new PinPinAssert(driver);
@@ -92,7 +94,7 @@ public class LoginPageTest {
 
     @AfterTest
     public void AfterTest() {
-        driver.close();
+//        driver.close();
         driver.quit();
     }
 }

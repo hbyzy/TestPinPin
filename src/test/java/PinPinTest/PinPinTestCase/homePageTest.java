@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class homePageTest {
     WebDriver driver;
-    PinPinTestPrepare ppp = new PinPinTestPrepare();
+    PinPinTestPrepare ppp ;
     PinPinAssert testAssert;
     FindElementWait findElement;
     Switchwindow switchwindow;
@@ -30,7 +30,9 @@ public class homePageTest {
     WebDriverWait wait;
 
     @BeforeTest
-    public void beforeTest() {
+    @Parameters("browserName")
+    public void beforeTest(String browserName) {
+        ppp= new PinPinTestPrepare(browserName);
         driver = ppp.driver;
 
         testAssert = new PinPinAssert(driver);

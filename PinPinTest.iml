@@ -12,9 +12,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.testng:testng:6.11" level="project" />
-    <orderEntry type="library" name="Maven: com.beust:jcommander:1.64" level="project" />
-    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.17" level="project" />
+    <orderEntry type="library" name="Maven: org.testng:testng:6.13.1" level="project" />
+    <orderEntry type="library" name="Maven: com.beust:jcommander:1.72" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured:3.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy:2.4.9" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-xml:2.4.9" level="project" />
@@ -50,14 +49,12 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-classic:1.0.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-core:1.0.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: info.cukes:cucumber-java:1.2.5" level="project" />
     <orderEntry type="library" name="Maven: info.cukes:cucumber-core:1.2.5" level="project" />
     <orderEntry type="library" name="Maven: info.cukes:cucumber-html:0.2.3" level="project" />
     <orderEntry type="library" name="Maven: info.cukes:cucumber-jvm-deps:1.0.5" level="project" />
     <orderEntry type="library" name="Maven: info.cukes:gherkin:2.12.2" level="project" />
     <orderEntry type="library" name="Maven: info.cukes:cucumber-testng:1.2.5" level="project" />
-    <orderEntry type="library" name="Maven: info.cukes:cucumber-junit:1.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-java:3.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-api:3.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-chrome-driver:3.4.0" level="project" />
@@ -85,6 +82,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:9.4.1.v20170120" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:4.1.0" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:4.1.0" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: com.codeborne:phantomjsdriver:1.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:htmlunit-driver:2.26" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />

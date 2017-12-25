@@ -144,17 +144,14 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>
-                                ${basedir}/src/test/resources/testSuite.xml
-                            </suiteXmlFile>
-                            0
-                        </suiteXmlFiles>
+
                         <systemPropertyVariables>
-                            <!--<testEnvironment>${browserName}</testEnvironment>-->
+                            <broswerName>${browserName}</broswerName>
                         </systemPropertyVariables>
                         <suiteXmlFiles>
-                            <!--<file>java/PinPinTest/testNGXML\LoginPage.xml</file>-->
+                            <suiteXmlFile>
+                                ${basedir}/src/test/java/PinPinTest/PinPinTestcase/LoginPageTest
+                            </suiteXmlFile>
                         </suiteXmlFiles>
                         <properties>
                             <property>

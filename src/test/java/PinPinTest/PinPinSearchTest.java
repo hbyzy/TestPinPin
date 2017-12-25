@@ -2,9 +2,9 @@ package PinPinTest;
 
 import PinPinTest.Prepare.PinPinTestPrepare;
 import PinPinTest.Prepare.Switchwindow;
+
 import PinPinTest.Tools.FindElementWait;
 import PinPinTest.Tools.PinPinAssert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,7 +30,7 @@ public class PinPinSearchTest {
     String resultWindow;  //,restaurantWindow;
     int[] deliveryTime;
     WebDriverWait  wait;
-    String searchInput="中国城";
+    String searchInput="guy concordia";
 
 //// section for @factory
 //        public PinPinSearchTest(String s) {

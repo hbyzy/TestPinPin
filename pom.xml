@@ -144,17 +144,20 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>
-                                ${basedir}/src/test/resources/testSuite.xml
-                            </suiteXmlFile>
-                            0
-                        </suiteXmlFiles>
+                        <excludes>
+                            <exclude>${basedir}/src/test/java/PinPinTest/testNGXML/PinPinSearch.xml</exclude>
+                            <exclude>${basedir}/src/test/java/PinPinTest/PinPinTestCase/homePageTest</exclude>
+                            <exclude>${basedir}/src/test/java/PinPinTest/PinPinTestCase/LoginPageTest</exclude>
+                            <exclude>${basedir}/src/test/java/PinPinTest/PinPinTestCase/SearchInput</exclude>
+                            <exclude>${basedir}/src/test/java/PinPinTest/PinPinSearchTest</exclude>
+                        </excludes>
                         <systemPropertyVariables>
-                            <!--<testEnvironment>${browserName}</testEnvironment>-->
+                            <broswerName>${browserName}</broswerName>
                         </systemPropertyVariables>
                         <suiteXmlFiles>
-                            <!--<file>java/PinPinTest/testNGXML\LoginPage.xml</file>-->
+                            <suiteXmlFile>
+                                ${basedir}/src/test/java/PinPinTest/testNGXML/LoginPage.xml
+                            </suiteXmlFile>
                         </suiteXmlFiles>
                         <properties>
                             <property>
@@ -163,9 +166,9 @@
                             </property>
                         </properties>
                         <threadCount>1</threadCount>
-                        <suiteXmlFiles>
-                            <!--<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
-                        </suiteXmlFiles>
+                        <!--<suiteXmlFiles>-->
+                        <!--&lt;!&ndash;<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>&ndash;&gt;-->
+                        <!--</suiteXmlFiles>-->
                     </configuration>
 
                     <dependencies>

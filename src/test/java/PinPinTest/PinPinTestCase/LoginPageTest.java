@@ -46,7 +46,7 @@ public class LoginPageTest {
     public void beforeTest(String browserName) {
         ppp = new PinPinTestPrepare(browserName);
         driver = ppp.driver;
-
+        String bName=System.getProperty("browserName");
         testAssert = new PinPinAssert(driver);
         findElement = new FindElementWait(driver);
         switchwindow = new Switchwindow(driver);

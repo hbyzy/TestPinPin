@@ -126,7 +126,7 @@ public class homePageTest {
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
         System.out.println("current Test: "+methodName);
         homePage.appleStore.click();
-// 中文       Assert.assertTrue(testAssert.PageChangeAssert("Pinpin Eat -Montreal Asian food delivery 拼拼点餐 on the App Store"));
+        Assert.assertTrue(testAssert.PageChangeAssert("Pinpin Eat -Montreal Asian food delivery 拼拼点餐 on the App Store"));
         System.out.println("apple store assert right");
     }
     @Test(enabled = false)

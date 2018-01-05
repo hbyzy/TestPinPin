@@ -11,7 +11,7 @@ public class regStr {
         final Matcher matcher = pattern.matcher(string);
 
         while (matcher.find()) {
-            System.out.println("完整匹配: " + matcher.group(0));
+            System.out.println("fully match " + matcher.group(0));
             for (int i = 0; i <= matcher.groupCount(); i++) {
                 System.out.println("Group " + i + ": " + matcher.group(i));
             }

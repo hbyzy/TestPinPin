@@ -151,12 +151,13 @@
                             <exclude>${basedir}/src/test/java/PinPinTest/PinPinTestCase/SearchInput</exclude>
                             <exclude>${basedir}/src/test/java/PinPinTest/PinPinSearchTest</exclude>
                         </excludes>
-                        <systemPropertyVariables>
-                            <broswerName>${browserName}</broswerName>
-                        </systemPropertyVariables>
+                        <!--<systemPropertyVariables>-->
+                            <!--<broswerName>${browserName}</broswerName>-->
+                        <!--</systemPropertyVariables>-->
                         <suiteXmlFiles>
                             <suiteXmlFile>
-                                ${basedir}/src/test/java/PinPinTest/testNGXML/LoginPage.xml
+                                ${basedir}/src/test/java/PinPinTest/testNGXML/${testsuit}
+                                <!--${basedir}/src/test/java/PinPinTest/testNGXML/LoginPage.xml-->
                             </suiteXmlFile>
                         </suiteXmlFiles>
                         <properties>

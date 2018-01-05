@@ -167,7 +167,7 @@
                         </properties>
                         <threadCount>1</threadCount>
                         <!--<suiteXmlFiles>-->
-                        <!--&lt;!&ndash;<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>&ndash;&gt;-->
                         <!--</suiteXmlFiles>-->
                     </configuration>
 

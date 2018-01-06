@@ -53,6 +53,7 @@ public class LoginPageTest {
         loginPage = new PinPinTest.PageElements.LoginPage(driver);
         userPage = new UserPage(driver);
         wait = new WebDriverWait(driver, 20);
+         System.out.println("driver running");
 
     }
 

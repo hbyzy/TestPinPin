@@ -6,10 +6,13 @@ import PinPinTest.Prepare.PinPinTestPrepare;
 import PinPinTest.Prepare.Switchwindow;
 import PinPinTest.Tools.FindElementWait;
 import PinPinTest.Tools.PinPinAssert;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.util.Date;
 
 public class LoginStayAndRegisteTest {
     WebDriver driver;
@@ -39,7 +42,7 @@ public class LoginStayAndRegisteTest {
     public void beforeTest(String browserName) {
         ppp = new PinPinTestPrepare(browserName);
         driver = ppp.driver;
-        String bName=System.getProperty("browserName");
+        String bName = System.getProperty("browserName");
         testAssert = new PinPinAssert(driver);
         findElement = new FindElementWait(driver);
         switchwindow = new Switchwindow(driver);
@@ -56,27 +59,32 @@ public class LoginStayAndRegisteTest {
 
     @Test(enabled = true)
     public void testLoginFunction() {
-        String email="12@12.com";
-        String passWord="123456";
+        String email = "12@12.com";
+        String passWord = "123456";
+        Date timeExpiry = null;
         System.out.println("---------------------------------------");
         String methodName = new Object() {
         }.getClass().getEnclosingMethod().getName();
         System.out.println("current Test: " + methodName + " with " + email + " , " + passWord);
-        findElement.FindElementWait(loginPage.userName,2);
+        findElement.FindElementWait(loginPage.userName, 2);
         loginPage.userName.sendKeys(email);
         loginPage.passWord.sendKeys(passWord);
         loginPage.getStayLogin.click();
         loginPage.loginButton.click();
+        findElement.FindElementWait(userPage.user, 2);
         Assert.assertEquals(userPage.user.getText(), "User");
         System.out.println(userPage.user.getText().equals("User") ? "success change to user page" : "something wrong");
-
-            findElement.FindElementWait(userPage.user,1);
-            userPage.user.click();
-            findElement.FindElementWait(userPage.userEmail,1);
-            Assert.assertEquals(userPage.userEmail.getText(),email);
-            findElement.FindElementWait(userPage.logOut,1);
-            userPage.logOut.click();
-}
+        userPage.user.click();
+        for (Cookie ck : driver.manage().getCookies()) {
+            System.out.println(ck.getName() + ";" + ck.getValue() + ";" + ck.getDomain() + ";" + ck.getPath() + ";" + ck.getExpiry() + ";" + ck.isSecure());
+            timeExpiry=ck.getExpiry();
+        }
+        long dateCal=testAssert.dateCalculate(timeExpiry);
+        System.out.println("difference date:"+dateCal);
+        findElement.FindElementWait(userPage.logOut, 1);
+        userPage.logOut.click();
+        Assert.assertTrue(dateCal>=13);
+    }
 
     @AfterMethod
     public void afterMethod() {

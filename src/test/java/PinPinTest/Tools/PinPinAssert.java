@@ -3,9 +3,9 @@ package PinPinTest.Tools;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,15 +47,13 @@ public class PinPinAssert {
     }
 
 
-
-
     public void regAssert(String str1, String str2) {
         List<String> res1 = new ArrayList<>();
         List<String> res2 = new ArrayList<>();
 
         String regex = "(\\bshop\\d+)";
-        System.out.println("str1:  "+str1);
-        System.out.println("str2:  "+str2);
+        System.out.println("str1:  " + str1);
+        System.out.println("str2:  " + str2);
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str1);
         Matcher matcher1 = pattern.matcher(str2);
@@ -65,18 +63,18 @@ public class PinPinAssert {
         while (matcher.find()) {
             for (int i = 1; i <= matcher.groupCount(); i++) {
                 res1.add(matcher.group(i));
-                System.out.println("str1  Group " + i + ": " + res1.get(i-1));
+                System.out.println("str1  Group " + i + ": " + res1.get(i - 1));
             }
         }
 
         while (matcher1.find()) {
             for (int i = 1; i <= matcher.groupCount(); i++) {
                 res2.add(matcher1.group(i));
-                System.out.println("str2 Group " + i + ": " + res2.get(i-1));
+                System.out.println("str2 Group " + i + ": " + res2.get(i - 1));
             }
         }
-            System.out.println("str1:"+res1.get(0));
-            System.out.println("str2:"+res2.get(0));
+        System.out.println("str1:" + res1.get(0));
+        System.out.println("str2:" + res2.get(0));
         //Assert.assertEquals(res1.get(0), res2.get(0));
 
     }
@@ -90,9 +88,26 @@ public class PinPinAssert {
             returnStr = matcher.group();
 
 //                System.out.println("Group " + 1 + ": " + matcher.group(1));
-     //     System.out.println("reg result:" + returnStr);
+            //     System.out.println("reg result:" + returnStr);
         }
         return Integer.parseInt(returnStr);
+    }
+
+    public long dateCalculate(Date date) {
+        long betweenDate = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        String dateString = sdf.format(date);
+
+        long nowDate = calendar.getTime().getTime(); //Date.getTime() 获得毫秒型日期
+        try {
+            long specialDate = sdf.parse(dateString).getTime();
+            betweenDate = (specialDate - nowDate) / (1000 * 60 * 60 * 24); //计算间隔多少天，则除以毫秒到天的转换公式
+            System.out.print(betweenDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return betweenDate;
     }
 }
 

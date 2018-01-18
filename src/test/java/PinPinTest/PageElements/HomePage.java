@@ -8,10 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     WebDriver driver;
-    By mapSerchInput = By.id("mapserchInput");
-    By mapSerchBtn = By.id("mapserchbtn");
-    By login = By.linkText("Login");
+    public By mapSerchInput = By.id("mapserchInput");
+    public By mapSerchBtn = By.id("mapserchbtn");
+    public By login = By.linkText("Login");
 
+    @FindBy(xpath = "//*[@id=\"mapsearchInput\"]")
+    public WebElement searchInput;
+    @FindBy(xpath = "//*[@id=\"mapsearchbtn\"]")
+    public WebElement searchBtn;
     @FindBy(xpath = "//*[@id='appstoreImg']")
     public WebElement appleStore;
     @FindBy(xpath = "//*[@id='playstoreImg']")

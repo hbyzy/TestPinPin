@@ -16,6 +16,8 @@ public class UserPage {
     public WebElement userClass;
     @FindBy(xpath = "//*[@id='view']/div/div[2]/div/button")
     public WebElement logOut;
+    @FindBy(xpath = "//*[@id=\"view\"]/div/div[2]/div/h4[3]")
+    public WebElement userEmail;
 
 
     public UserPage(WebDriver wdriver) {

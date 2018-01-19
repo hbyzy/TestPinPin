@@ -55,7 +55,7 @@ public class homePageTest {
         }
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void clickLoginBtn() {
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -83,7 +83,7 @@ public class homePageTest {
         System.out.println(log.getText().equals("Login") ? "change to login window by alert " : "something wrong when click basket button");
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void translateTestChinese() {
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -95,7 +95,7 @@ public class homePageTest {
         Assert.assertEquals(homePage.loginText.getText(), "账户");
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void translateTestFrench() {
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -107,7 +107,7 @@ public class homePageTest {
         Assert.assertEquals(homePage.loginText.getText(), "Compte");
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void translateTestEnglish() {
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -120,7 +120,7 @@ public class homePageTest {
         Assert.assertEquals(homePage.loginText.getText(), "Login");
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void appleStore() throws InterruptedException {
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -129,7 +129,7 @@ public class homePageTest {
         Assert.assertTrue(testAssert.PageChangeAssert("Pinpin Eat -Montreal Asian food delivery 拼拼点餐 on the App Store"));
         System.out.println("apple store assert right");
     }
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void playStore() {
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -141,7 +141,7 @@ public class homePageTest {
         Assert.assertEquals(homePage.playStoreTitle.getText(),"Pinpin Market");
             System.out.println("playStore assert right");
     }
-    @Test(enabled=false)
+    @Test(enabled=true)
     public void needDriverClick(){
         System.out.println("---------------------------------------");
         String methodName = new Object(){}.getClass().getEnclosingMethod().getName();

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Interactive;
 import org.openqa.selenium.interactions.Sequence;
@@ -49,9 +50,14 @@ public class PinPinTestPrepare implements Interactive {
             driver = new EventFiringWebDriver(edriver);
             DriverListener handler = new DriverListener();
             driver.register(handler);
+        } else if (browserName.equals("edge")) {
+            System.setProperty("webdriver.edge.driver", "src/test/resources/drivers/MicrosoftWebDriver.exe");
+            WebDriver edriver = new EdgeDriver();
+            driver = new EventFiringWebDriver(edriver);
+            DriverListener handler = new DriverListener();
+            driver.register(handler);
         }
     }
-
 
     // public PinPinTestPrepare(){
 //

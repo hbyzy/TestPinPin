@@ -87,7 +87,7 @@ public class PinPinSearchTest {
             By loginBtn=By.linkText("Login");
             WebElement serchText=driver.findElement(mapSearchInput);
             WebElement serchBtn=driver.findElement(mapSearchBtn);
-            WebElement login=driver.findElement(loginBtn);
+//            WebElement login=driver.findElement(loginBtn);
 //            if (serchBtn.getAttribute("disabled")==null)
 //                System.out.println("disabled");
 //
@@ -99,7 +99,7 @@ public class PinPinSearchTest {
             WebElement centerText = findElement.FindElementWait(CT, 1);
 
             String getText=centerText.getText();
-            String text="Deliver to "+input+".";
+            String text="Deliver to "+input+". ";
             Assert.assertEquals(text,getText);
             if (getText.equals(text))
                 System.out.println("in right searchresult page");
@@ -126,7 +126,7 @@ public class PinPinSearchTest {
         String imgurl,imgTemp,dlivTime;
         int minTime=0,maxTime=0;
         int index;
-        for (int i=0;i<3;i++) {
+        for (int i=0;i<resultName.size();i++) {
             System.out.println("---------------------------------------");
             System.out.println("try to click:" + resultName.get(i).getText());
 

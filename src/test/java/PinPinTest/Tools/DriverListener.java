@@ -8,13 +8,11 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 public class DriverListener implements WebDriverEventListener {
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
-
         //System.out.println("here is beforeAlertAccept");
     }
 
     @Override
     public void afterAlertAccept(WebDriver webDriver) {
-
         //System.out.println("here is afterAlertAccept");
     }
 
@@ -25,29 +23,26 @@ public class DriverListener implements WebDriverEventListener {
 
     @Override
     public void beforeAlertDismiss(WebDriver webDriver) {
-        //
-        // System.out.println("here is beforeAlertDismiss");
+        //System.out.println("here is beforeAlertDismiss");
     }
 
     @Override
     public void beforeNavigateTo(String s, WebDriver webDriver) {
-        System.out.println("here is before navigate to listener"+s);
+       // System.out.println("here is before navigate to listener"+s);
     }
 
     @Override
     public void afterNavigateTo(String s, WebDriver webDriver) {
-        System.out.println("here is after navigate to listener");
+        //System.out.println("here is after navigate to listener");
     }
 
     @Override
     public void beforeNavigateBack(WebDriver webDriver) {
-
         //System.out.println("here is before navigate back listener");
     }
 
     @Override
     public void afterNavigateBack(WebDriver webDriver) {
-
         //System.out.println("here is after navigate back listener");
     }
 
@@ -103,18 +98,16 @@ public class DriverListener implements WebDriverEventListener {
 
     @Override
     public void beforeScript(String s, WebDriver webDriver) {
-
-        System.out.println("here is before script listener"+s);
+        //System.out.println("here is before script listener");
     }
 
     @Override
     public void afterScript(String s, WebDriver webDriver) {
-
         //System.out.println("here is after script listener");
     }
 
     @Override
     public void onException(Throwable throwable, WebDriver webDriver) {
-        System.out.println("here is on exception listener"+throwable);
+        //System.out.println("here is on exception listener");
     }
 }

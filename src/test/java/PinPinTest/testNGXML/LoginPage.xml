@@ -2,12 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/QASTUDY/program/java/TestPinPin">
-       <parameter name="browserName" value="${browserName}"/>
+       <!--<parameter name="browserName" value="${browserName}"/>-->
        <!--<parameter name="browserName" value="firefox"/>-->
-       <!--<parameter name="browserName" value="chrome"/>-->
-       <!--<parameter name="browserName" value="edge"/>-->
+       <parameter name="browserName" value="chrome"/>
           <classes>
-            <class name="PinPinTest.PinPinTestCase.LoginPageTest"/>
+            <!--<class name="PinPinTest.PinPinTestCase.LoginPageTest"/>-->
+            <class name="PinPinTest.PinPinTestCase.LoginStayAndRegisteTest"/>
                 <!--<methods>-->
                     <!--<include name="PinPinHomePageTest"/>-->
                 <!--</methods>-->

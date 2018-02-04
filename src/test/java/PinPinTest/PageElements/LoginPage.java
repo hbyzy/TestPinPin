@@ -12,6 +12,8 @@ public class LoginPage {
     public By LoginTxt = By.xpath("//*[@id='loginDiv']/div[2]/div/h4");
 
 
+    @FindBy(xpath = "//*[@id='myNavBar']/ul/li[1]/a/span/span[2]")
+    public WebElement topLogin;
     @FindBy(xpath = "//*[@id='username']")
     public WebElement userName;
     @FindBy(xpath = "//*[@id='password']")
@@ -26,6 +28,11 @@ public class LoginPage {
     public WebElement signUp;
     @FindBy(xpath = "//*[@id='loginDiv']/div[2]/div/p")
     public WebElement loginWrongMessage;
+    @FindBy(xpath = "//*[@id=\"loginDiv\"]/div[2]/div/form/div[1]/span")
+    public WebElement nullEmailMassage;
+    @FindBy(xpath = "//*[@id=\"loginDiv\"]/div[2]/div/form/div[2]/span")
+    public WebElement nullPassMassage;
+
 
 
     public LoginPage(WebDriver wdriver) {

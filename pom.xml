@@ -15,14 +15,22 @@
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
         <!--<junit.version>4.12</junit.version>-->
         <xml-apis.version>2.0.2</xml-apis.version>
-        <poi.version>3.11-beta3</poi.version>
+        <poi.version>3.17</poi.version>
         <selenium-java.version>3.4.0</selenium-java.version>
         <cucumber-testng.version>1.2.5</cucumber-testng.version>
+        <httpclient.version>4.5.5</httpclient.version>
+        <!--<json-version>20171018</json-version>-->
     </properties>
     <packaging>jar</packaging>
     <name>TestExec</name>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -100,7 +108,7 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.9</version>
+            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -123,6 +131,11 @@
             <artifactId>json</artifactId>
             <version>20140107</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
         </dependency>
     </dependencies>
     <build>

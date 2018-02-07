@@ -1,5 +1,6 @@
 package yahooApi;
 
+import cucumber.api.java.cs.A;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -30,10 +31,13 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class YahooResponse {
+    static public Map<String,String> result=new HashMap<>();
     public void apiChoice(String choice) throws IOException, ClassNotFoundException, ParserConfigurationException, InstantiationException, SAXException, IllegalAccessException, DocumentException {
         if (choice.equals("json")) {
             String YQL = " from weather.forecast where woeid in (select woeid from geo.places(1) where text='montreal,qc') and u='c'";
@@ -81,7 +85,7 @@ public class YahooResponse {
         String resString = EntityUtils.toString(myEntity);
         JSONObject obj = new JSONObject(resString);
         System.out.println(obj.toString(4));
-       jsonpaser(obj);
+        jsonpaser(obj);
 
         JSONObject query = obj.getJSONObject("query");
         JSONObject result = query.getJSONObject("results");
@@ -149,9 +153,12 @@ public class YahooResponse {
         System.out.println(rootname + "  " + rootText);
         listNodes(root);
 
+        for (String key : result.keySet()) {
+            System.out.println(key+"="+result.get(key));
+//        List list=document.selectNodes("//item/@yweather:forecast");
+//        System.out.println(list);
+        }
     }
-
-
 
     //    not the best result for  pretty printing xml
 //    public void paserXMl(String resSting) throws TransformerException {
@@ -166,36 +173,66 @@ public class YahooResponse {
 //        tf.setOutputProperty(OutputKeys.INDENT,"yes");
 //        tf.transform(xmlInput,xmlOutput);
 
-//        System.out.println(xmlOutput.getWriter().toString());
+    //        System.out.println(xmlOutput.getWriter().toString());
 //
 //    }
     public void prettyPrintXML(String resString) throws ParserConfigurationException, IOException, SAXException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         InputSource src = new InputSource(new StringReader(resString));
-        Node document =  DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src).getDocumentElement();
+        Node document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src).getDocumentElement();
         Boolean keepDeclaration = Boolean.valueOf(resString.startsWith("<?xml"));
-        System.setProperty(DOMImplementationRegistry.PROPERTY,"com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl");
+        System.setProperty(DOMImplementationRegistry.PROPERTY, "com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl");
 
         DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
         DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("ls");
-        LSSerializer writer=impl.createLSSerializer();
+        LSSerializer writer = impl.createLSSerializer();
 
-        writer.getDomConfig().setParameter("format-pretty-print",Boolean.TRUE);
+        writer.getDomConfig().setParameter("format-pretty-print", Boolean.TRUE);
         writer.getDomConfig().setParameter("xml-declaration", keepDeclaration);
         System.out.println(writer.writeToString(document));
     }
-    public void listNodes(Element node){
-        List<Attribute> list=node.attributes();
-        for(Attribute attribute:list){
-            System.out.println("Attribute:"+attribute.getName()+">>>>"+node.getText());
-        }
-        if (!(node.getTextTrim().equals(""))){
-            System.out.println(node.getName()+":"+node.getText());
-        }
-        Iterator<Element> iterator=node.elementIterator();
+
+    public void listNodes(Element node) {
+
+//        List<Attribute> list = node.attributes();
+//        for (Attribute attribute : list) {
+//            System.out.println("Attribute:" + attribute.getName() + ">text>" + attribute.getText());
+//        }
+//            if (!node.getTextTrim().equals("")) {
+//                System.out.println(node.getName() + ":" + node.getText());
+//            }
+        Iterator<Element> iterator = node.elementIterator();
+        System.out.println("begin parse---------------------");
         while (iterator.hasNext()) {
-            Element e= iterator.next();
+            Element e = iterator.next();
+            System.out.println(e);
+            Iterator iterator1=e.elementIterator();
+            while(iterator1.hasNext()){
+                Element eSub= (Element) iterator1.next();
+                System.out.println("subelement:>>"+eSub.getName()+"Text: "+eSub.getText()+"attrutes: "+eSub.attributes());
+
+                if (eSub.getName().equals("forecast")){
+                    String code= eSub.attributeValue("code");
+                    String date=eSub.attributeValue("date");
+                    String day=eSub.attributeValue("day");
+                    String high= eSub.attributeValue("high");
+                    String low=eSub.attributeValue("low");
+                    String text=eSub.attributeValue("text");
+
+                    result.put(code+":date=",date);
+                    result.put(code+":day=",day);
+                    result.put(code+":high=",high);
+                    result.put(code+":low=",low);
+                    result.put(code+":text=",text);
+                      }
+                    System.out.println("try got result:"+result);
+                }
+
             listNodes(e);
         }
-
     }
+
+
 }
+
+
+
